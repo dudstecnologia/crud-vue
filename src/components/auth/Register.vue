@@ -41,8 +41,10 @@ export default {
   methods: {
     register: function () {
       this.$store.dispatch('register', this.user)
-       .then(() => this.$router.push('/aluno'))
-       .catch(err => console.log(err))
+        .then(() => this.$router.push('/aluno'))
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }

@@ -14,20 +14,10 @@ export default {
     }
   },
   methods: {
-    /*
-    verificaLogin: function () {
-      var statusLogin = this.$store.getters.isLoggedIn
-      if(!statusLogin) this.$router.push('/')
-    } 
-    */
   },
   created () {
-    // this.verificaLogin()
-    // console.log(`Status: ${this.$store.getters.isLoggedIn}`)
   },
   updated () {
-    // this.verificaLogin()
-    // console.log('Passou aqui')
   }
 }
 </script>

@@ -31,9 +31,12 @@ export default {
       })
     },
     logout: function () {
-      this.$store.dispatch('logout').then(() => {
-        this.$router.push('/')
-        }).catch(err => this.$router.push('/'))
+      this.$store.dispatch('logout')
+        .then(() => { this.$router.push('/') })
+        .catch(error => {
+          console.log(error)
+          this.$router.push('/')
+        })
     }
   }
 }
