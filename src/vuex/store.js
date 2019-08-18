@@ -28,7 +28,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    login({commit}, user){
+    login ({commit}, user) {
       return new Promise((resolve, reject) => {
         commit('auth_request')
         axios.post('http://127.0.0.1:8000/api/auth/login', user)
@@ -47,7 +47,7 @@ export default new Vuex.Store({
         })
       })
     },
-    register({commit}, user){
+    register ({commit}, user) {
       return new Promise((resolve, reject) => {
         commit('auth_request')
         axios.post('http://127.0.0.1:8000/api/auth/register', user)
@@ -66,7 +66,7 @@ export default new Vuex.Store({
         })
       })
     },
-    logout({commit}){
+    logout ({commit}) {
       return new Promise((resolve, reject) => {
         commit('logout')
         axios.get('http://127.0.0.1:8000/api/auth/logout')

@@ -10,46 +10,23 @@ export default {
   name: 'App',
   data: function () {
     return {
-      tokenValidate: true,
-      user_data: ''
+
     }
   },
   methods: {
-    async validateToken () {
-      this.tokenValidate = true
-
-      const json = localStorage.getItem(userKey)
-      const userData = JSON.parse(json)
-      this.$store.commit('setUser', null)
-
-      if (!userData) {
-        console.log('Não tem usuário salvo')
-        this.tokenValidate = false
-        this.$router.push({ path: '/' })
-        return
-      }
-
-      this.user_data = userData
-
-      console.log('Tem usuário salvo')
-      const res = await axios.get(`${baseApiUrl}/user`)
-
-      console.log(res.data)
-    }
+    /*
+    verificaLogin: function () {
+      var statusLogin = this.$store.getters.isLoggedIn
+      if(!statusLogin) this.$router.push('/')
+    } 
+    */
   },
   created () {
-    // this.validateToken()
-    // this.user_data = this.$store.state.user
-    /*
-    axios.get(`${baseApiUrl}/user`)
-      .then(res => {
-        console.log(res.data)
-      }).catch(function (error) {
-        console.log(error)
-      })
-      */
+    // this.verificaLogin()
+    // console.log(`Status: ${this.$store.getters.isLoggedIn}`)
   },
   updated () {
+    // this.verificaLogin()
     // console.log('Passou aqui')
   }
 }

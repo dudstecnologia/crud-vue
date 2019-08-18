@@ -23,10 +23,6 @@ export default {
   },
   */
   methods: {
-    salvarValor () {
-      //console.log(localStorage.getItem(userKey))
-      // this.$store.commit('setUser', 'Teste de Estado')
-    },
     requestTeste () {
       this.$http.get(`/teste`).then(res => {
         console.log(res.data)
@@ -35,10 +31,9 @@ export default {
       })
     },
     logout: function () {
-      this.$store.dispatch('logout')
-      .then(() => {
+      this.$store.dispatch('logout').then(() => {
         this.$router.push('/')
-      }).catch(err => this.$router.push('/'))
+        }).catch(err => this.$router.push('/'))
     }
   }
 }
