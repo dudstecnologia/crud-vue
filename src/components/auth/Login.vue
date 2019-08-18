@@ -5,14 +5,14 @@
         <div class="card card-signin my-5">
           <div class="card-body">
             <h2 class="card-title text-center">CRUD</h2>
-            <form class="form-signin">
+            <form class="form-signin" @submit.prevent="login">
               <div class="form-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                <input type="email" v-model="user.email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
                 <!-- <label for="inputEmail">e-mail</label> -->
               </div>
 
               <div class="form-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+                <input type="password" v-model="user.password" id="inputPassword" class="form-control" placeholder="Senha" required>
                 <!-- <label for="inputPassword">senha</label> -->
               </div>
               <button class="btn btn-primary btn-block text-uppercase" type="submit">Login</button>
@@ -27,7 +27,22 @@
 </template>
 
 <script>
-export default {}
+
+export default {
+  name: 'Login',
+  data: function () {
+    return {
+      user: {}
+    }
+  },
+  methods: {
+    login: function () {
+      this.$store.dispatch('login', this.user)
+        .then(() => this.$router.push('/aluno'))
+        .catch(err => console.log(err))
+    }
+  }
+}
 </script>
 
 <style scoped>

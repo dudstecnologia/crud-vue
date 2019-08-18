@@ -5,26 +5,22 @@
         <div class="card card-signin my-5">
           <div class="card-body">
             <h2 class="card-title text-center">CRUD</h2>
-            <form class="form-signin">
+            <form class="form-signin" @submit.prevent="register()">
               <div class="form-group">
-                <input type="text" id="nome" class="form-control" placeholder="Nome" required autofocus>
-                <!-- <label for="nome">Nome</label> -->
+                <input type="text" v-model="user.name" id="nome" class="form-control" placeholder="Nome" required autofocus>
               </div>
               <div class="form-group">
-                <input type="email" id="email" class="form-control" placeholder="Email" required>
-                <!-- <label for="email">Email</label> -->
+                <input type="email" v-model="user.email" id="email" class="form-control" placeholder="Email" required>
               </div>
               <div class="form-group">
-                <input type="password" id="password" class="form-control" placeholder="Senha" required>
-                <!-- <label for="password">Senha</label> -->
+                <input type="password" v-model="user.password" id="password" class="form-control" placeholder="Senha" required>
               </div>
               <div class="form-group">
-                <input type="password" id="password_confirmation" class="form-control" placeholder="Confirma senha" required>
-                <!-- <label for="password_confirmation">Confirma senha</label> -->
+                <input type="password" v-model="user.password_confirmation" id="password_confirmation" class="form-control" placeholder="Confirma senha" required>
               </div>
               <button class="btn btn-primary btn-block text-uppercase" type="submit">Cadastrar</button>
               <hr class="my-4">
-              <router-link to="/login" class="btn btn-info btn-block text-uppercase">Voltar</router-link>
+              <router-link to="/" class="btn btn-info btn-block text-uppercase">Voltar</router-link>
             </form>
           </div>
         </div>
@@ -34,7 +30,22 @@
 </template>
 
 <script>
-export default {}
+
+export default {
+  name: 'Register',
+  data: function () {
+    return {
+      user: {}
+    }
+  },
+  methods: {
+    register: function () {
+      this.$store.dispatch('register', this.user)
+       .then(() => this.$router.push('/aluno'))
+       .catch(err => console.log(err))
+    }
+  }
+}
 </script>
 
 <style>
