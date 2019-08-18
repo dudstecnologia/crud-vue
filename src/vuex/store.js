@@ -68,14 +68,15 @@ export default new Vuex.Store({
     },
     logout ({commit}) {
       return new Promise((resolve, reject) => {
-        commit('logout')
         axios.get('http://127.0.0.1:8000/api/auth/logout')
           .then(resp => {
+            commit('logout')
             localStorage.removeItem('_token_temp')
             delete axios.defaults.headers.common['Authorization']
             resolve(resp)
           })
           .catch(err => {
+            commit('logout')
             localStorage.removeItem('_token_temp')
             delete axios.defaults.headers.common['Authorization']
             reject(err)
