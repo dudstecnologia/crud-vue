@@ -1,11 +1,12 @@
 <template>
   <div id="app">
-    <router-view/>
+    <Header v-if="isLoggedIn" />
+    <router-view />
   </div>
 </template>
 
 <script>
-
+import Header from './components/layout/Header'
 export default {
   name: 'App',
   data: function () {
@@ -13,11 +14,11 @@ export default {
 
     }
   },
-  methods: {
+  computed: {
+    isLoggedIn : function(){ return this.$store.getters.isLoggedIn }
   },
-  created () {
-  },
-  updated () {
+  components: {
+    Header
   }
 }
 </script>
