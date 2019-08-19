@@ -6,7 +6,7 @@
         </div>
         <div class="col-sm-alto">
             <b-button @click="openModal(null)" variant="primary">Cadastrar Novo</b-button>
-            <a class="btn btn-success" @click="gerarRelatorio()">Relatorio</a>
+            <a class="btn btn-success" href="">Relatorio</a>
         </div>
     </div>
     <b-modal id="modal-1" ref="modal" size="lg" title="Cadastro" hide-footer>
