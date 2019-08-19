@@ -38,7 +38,10 @@ export default {
   methods: {
     login: function () {
       this.$store.dispatch('login', this.user)
-        .then(() => this.$router.push('/aluno'))
+        .then((resp) => {
+          // console.log(resp.data.user)
+          this.$router.push('/aluno')
+        })
         .catch(err => console.log(err))
     }
   }

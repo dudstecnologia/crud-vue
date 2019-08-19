@@ -7,17 +7,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     status: '',
-    token: localStorage.getItem('_token_temp') || '',
-    user: {}
+    token: localStorage.getItem('_token_temp') || ''
   },
   mutations: {
     auth_request (state) {
       state.status = 'loading'
     },
-    auth_success (state, token, user) {
+    auth_success (state, token) {
       state.status = 'success'
       state.token = token
-      state.user = user
     },
     auth_error (state) {
       state.status = 'error'
@@ -34,10 +32,9 @@ export default new Vuex.Store({
         axios.post('http://127.0.0.1:8000/api/auth/login', user)
           .then(resp => {
             const token = resp.data.access_token
-            const user = resp.data.user
             localStorage.setItem('_token_temp', token)
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-            commit('auth_success', token, user)
+            commit('auth_success', token)
             resolve(resp)
           })
           .catch(err => {
@@ -53,10 +50,9 @@ export default new Vuex.Store({
         axios.post('http://127.0.0.1:8000/api/auth/register', user)
           .then(resp => {
             const token = resp.data.access_token
-            const user = resp.data.user
             localStorage.setItem('_token_temp', token)
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-            commit('auth_success', token, user)
+            commit('auth_success', token)
             resolve(resp)
           })
           .catch(err => {
