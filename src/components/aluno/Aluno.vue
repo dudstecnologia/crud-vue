@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <h1>Tela de Aluno</h1>
-    <h2>TOKEN SALVO: </h2>
-
+    <h1>Aluno</h1>
+    <!--
     <button class="btn btn-primary" @click.prevent="salvarValor()">Salvar Valor de Teste</button>
     <button class="btn btn-primary" @click.prevent="requestTeste()">Request Teste</button>
     <button class="btn btn-primary" @click.prevent="logout()">Logout</button>
+    -->
   </div>
 </template>
 

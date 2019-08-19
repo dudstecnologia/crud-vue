@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="lg" type="dark" variant="dark">
+  <b-navbar id="navbar" toggleable="lg" type="dark" variant="dark">
     <div class="container">
     <b-navbar-brand href="#">CRUD</b-navbar-brand>
 
@@ -7,11 +7,10 @@
 
     <b-collapse id="nav-collapse" is-nav>
 
-      <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-item href="#">Aluno</b-nav-item>
-        <b-nav-item href="#">Curso</b-nav-item>
-        <b-nav-item href="#">Professor</b-nav-item>
+        <b-nav-item :to="{ name: 'aluno' }">Aluno</b-nav-item>
+        <b-nav-item :to="{ name: 'curso' }">Curso</b-nav-item>
+        <b-nav-item :to="{ name: 'professor' }">Professor</b-nav-item>
         <b-nav-item @click.prevent="logout()">Logout</b-nav-item>
       </b-navbar-nav>
     </b-collapse>
@@ -40,4 +39,7 @@ export default {
 </script>
 
 <style>
+#navbar {
+  margin-bottom: 10px
+}
 </style>

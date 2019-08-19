@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
+axios.defaults.baseURL = 'http://crud.api/api/auth'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -29,7 +31,7 @@ export default new Vuex.Store({
     login ({commit}, user) {
       return new Promise((resolve, reject) => {
         commit('auth_request')
-        axios.post('http://127.0.0.1:8000/api/auth/login', user)
+        axios.post('/login', user)
           .then(resp => {
             const token = resp.data.access_token
             localStorage.setItem('_token_temp', token)
@@ -47,7 +49,7 @@ export default new Vuex.Store({
     register ({commit}, user) {
       return new Promise((resolve, reject) => {
         commit('auth_request')
-        axios.post('http://127.0.0.1:8000/api/auth/register', user)
+        axios.post('/register', user)
           .then(resp => {
             const token = resp.data.access_token
             localStorage.setItem('_token_temp', token)
@@ -64,7 +66,7 @@ export default new Vuex.Store({
     },
     logout ({commit}) {
       return new Promise((resolve, reject) => {
-        axios.get('http://127.0.0.1:8000/api/auth/logout')
+        axios.get('/logout')
           .then(resp => {
             commit('logout')
             localStorage.removeItem('_token_temp')
