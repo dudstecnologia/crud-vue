@@ -13,15 +13,7 @@
 
 export default {
   created () {
-    // console.log('Criou o component de Aluno')
   },
-  /*
-  computed: {
-    token () {
-      // return this.$store.state.auth.token
-    }
-  },
-  */
   methods: {
     requestTeste () {
       this.$http.get(`/teste`).then(res => {
