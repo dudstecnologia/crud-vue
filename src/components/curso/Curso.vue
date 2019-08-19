@@ -33,7 +33,7 @@
 
     <div class="row">
       <table class="table table-bordered table-striped">
-          <thead>
+          <thead class="thead-dark">
               <tr>
               <th>Nome</th>
               <th>Professor</th>
