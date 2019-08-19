@@ -14,19 +14,17 @@
             <b-form-input
             id="nome"
             v-model="professor.nome"
-            required
-            ></b-form-input>
+            required>
+            </b-form-input>
         </b-form-group>
-
         <b-form-group label="Data de Nascimento">
             <b-form-input
-            id="data_nascimento"
-            v-model="professor.data_nascimento"
-            type="date"
-            required
-            ></b-form-input>
+              id="data_nascimento"
+              v-model="professor.data_nascimento"
+              type="date"
+              required>
+            </b-form-input>
         </b-form-group>
-
         <div class="text-right">
             <b-button type="submit" class="btn btn-success">Salvar</b-button>
         </div>
@@ -152,6 +150,7 @@ export default {
           .then(function (resp) {
             app.professor = resp.data
             app.$refs.modal.show()
+            app.toastError('Ocorreu um erro ao selecionar')
           })
           .catch(function () {
             app.toastError('Erro ao buscar os dados do professor')

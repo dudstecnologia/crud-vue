@@ -18,20 +18,53 @@
           id="input-group-3"
           label="Professor"
           label-for="input-3">
-						<b-form-select
-                id="input-3"
-                v-model="curso.id_professor"
-                required>
-						      <option v-for="(p, index) in professores" :key="index" v-bind:value="p.id" :selected="p.id">{{ p.nome }}</option>
-						</b-form-select>
-				</b-form-group>
-
+          <b-form-select
+            id="input-3"
+            v-model="curso.id_professor"
+            required>
+              <option v-for="(p, index) in professores" :key="index" v-bind:value="p.id" :selected="p.id">{{ p.nome }}</option>
+          </b-form-select>
+        </b-form-group>
         <div class="text-right">
           <b-button type="submit" class="btn btn-success">Salvar</b-button>
         </div>
       </form>
     </b-modal>
 
+    <div class="row">
+      <table class="table table-bordered table-striped">
+          <thead>
+              <tr>
+              <th>Nome</th>
+              <th>Professor</th>
+              <th> </th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr v-for="(c, index) in cursos" :key="index" :value="c.id">
+                  <td>{{ c.nome }}</td>
+                  <td>{{ c.professors.nome }}</td>
+                  <td>
+                      <button class="btn btn-sm btn-info"
+                          @click="openModal(c.id)">
+                              Editar
+                          </button>
+
+                      <click-confirm id="clickconfirm"
+                          :messages="{title: 'Deseja mesmo excluir?', yes: 'Sim', no: 'Não'}"
+                          yes-class="btn btn-danger" >
+
+                          <button class="btn btn-sm btn-danger"
+                          @click="deleteCurso(c.id, index)">
+                              Excluir
+                          </button>
+
+                      </click-confirm>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -40,39 +73,41 @@ export default {
   data () {
     return {
       id: null,
-			professores: [],
-			cursos: [],
-      curso: {},
-    };
+      professores: [],
+      cursos: [],
+      curso: {}
+    }
   },
   created () {
     this.getDados()
   },
   methods: {
     getDados () {
-      var app = this;
+      var app = this
       this.$http.get('/curso')
-        .then( function (resp) {
-
-          console.log(resp.data)
-
-          // console.log(resp.data.professores);
-          // console.log(resp.data.cursos);
-
-          app.professores = resp.data.professors;
-          // app.cursos = resp.data.cursos;
+        .then(function (resp) {
+          app.professores = resp.data.professors
+          app.cursos = resp.data.curso
         })
         .catch(function (err) {
           console.log(err)
         })
     },
+    deleteCurso (id, index) {
+      var app = this
+      this.$http.delete('/curso/' + id)
+        .then(function (resp) {
+          app.cursos.splice(index, 1)
+          app.toastSuccess('Professor excluído com sucesso')
+        })
+        .catch(function (resp) {
+          app.toastError('Ocorreu um erro ao excluir')
+        })
+    },
     formCurso () {
       var app = this
-      // var url = '/desafio2/api/curso'
-      // if(this.id) url = `/desafio2/api/curso/${this.id}`
 
       var url, method
-
       app.id ? method = 'put' : method = 'post'
       app.id ? url = `/curso/${this.id}` : url = '/curso'
 
@@ -109,18 +144,12 @@ export default {
         var app = this
         this.$http.get(`/curso/${id}`)
           .then(function (resp) {
-            // console.log(resp.data);
-            app.professores = resp.data.professores
-            app.curso.nome = resp.data.curso.nome
-            app.curso.id_professor = resp.data.curso.id_professor_encrypt
-
+            app.curso = resp.data
             app.$refs.modal.show()
-
-            // app.toastError(`${resp.data.retorno}`)
           })
           .catch(function (resp) {
             // console.log("Ocorreu um erro");
-            app.toastError(`${resp.data.retorno}`)
+            app.toastError('Ocorreu um erro ao selecionar')
           })
       }
     },
@@ -136,5 +165,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* @import '../../assets/css/default.css' */
+#clickconfirm {
+  display: inline;
+}
 </style>

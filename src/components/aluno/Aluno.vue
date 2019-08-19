@@ -1,11 +1,15 @@
 <template>
   <div class="container">
-    <h1>Aluno</h1>
-    <!--
-    <button class="btn btn-primary" @click.prevent="salvarValor()">Salvar Valor de Teste</button>
-    <button class="btn btn-primary" @click.prevent="requestTeste()">Request Teste</button>
-    <button class="btn btn-primary" @click.prevent="logout()">Logout</button>
-    -->
+    <div class="row">
+        <div class="col-sm">
+            <h2>Aluno</h2>
+        </div>
+        <div class="col-sm-alto">
+            <b-button @click="openModal(null)" variant="primary">Cadastrar Novo</b-button>
+        </div>
+    </div>
+
+
   </div>
 </template>
 
@@ -36,5 +40,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* @import '../../assets/css/default.css' */
+#clickconfirm {
+  display: inline;
+}
 </style>
