@@ -90,10 +90,10 @@ export default {
       this.$http.get('/professor')
         .then(function (resp) {
           app.professores = resp.data
-          console.log(resp.data)
+          // console.log(resp.data)
         })
-        .catch(function (error) {
-          console.log(error)
+        .catch(function () {
+          // console.log(error)
         })
     },
     deleteProfessor (id, index) {
@@ -110,20 +110,11 @@ export default {
     },
     formProfessor: function () {
       var app = this
-      /*
-      var url = '/professor'
-      var method = 'post'
-      if (this.id) {
-        method = 'put'
-        url = `/professor/${this.id}`
-      }
-      */
+
       var url, method
 
       app.id ? method = 'put' : method = 'post'
       app.id ? url = `/professor/${this.id}` : url = '/professor'
-
-      // console.log(`METODO: ${}` )
 
       this.$http({
         method: method,
@@ -134,7 +125,7 @@ export default {
         }
       })
         .then(function (resp) {
-          console.log(resp.data)
+          // console.log(resp.data)
 
           app.getProfessores()
           app.professor = []
@@ -142,8 +133,8 @@ export default {
 
           app.toastSuccess('Professor Cadastrado com sucesso')
         })
-        .catch(function (err) {
-          console.log(err)
+        .catch(function () {
+          // console.log(err)
 
           app.$refs.modal.hide()
           app.toastError('Ocorreu um erro ao cadastrar')
